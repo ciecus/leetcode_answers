@@ -223,3 +223,39 @@ if __name__ == "__main__":
     print("".join(replace_space(string)))
 
 ```
+# 题目五：青蛙跳台阶
+
+书 p77
+github代码名称：t5_frog_steps.py
+
+一只青蛙一次可以跳上1阶台阶，也可以跳上2阶台阶。求该青蛙跳上一个n阶台阶总共有多少种跳法？
+
+输入格式：
+台阶数 n
+输出 
+跳法 m
+
+==思路==
+构建一个列表进行查找
+|0|1|2|3|4|$\dots$|n|
+|--|--|--|--|--|--|--|--|--|--|
+|1|1|2|f(1)+f(2)|f(2)+f(3)|\dots|f(n-1)+f(n-2)|
+
+==通过测试用例代码==
+
+```
+class Solution:
+    def jumpFloor(self, n):
+            if not isinstance(n,int):
+                return 'wrong input'
+            else:
+                if n in {0,1}:
+                    return 1
+                elif n == 2:
+                    return 2
+                else:
+                    list_ = [1 for i in range(n+1)]
+                    for i in range(2,n+1):
+                        list_[i] = list_[i-1]+list_[i-2]
+                    return list_[n]
+```
